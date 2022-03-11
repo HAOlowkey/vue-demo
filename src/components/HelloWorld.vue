@@ -50,6 +50,15 @@
     </ul>
   </div>
 
+  <!-- computed练习 -->
+  <h1>Reverse: {{ reverseName }}</h1>
+
+  <!-- filter练习 -->
+  <h1>{{ ts | parseTime }}</h1>
+
+  <!-- directive练习 -->
+  <input v-focus type="text">
+
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -93,6 +102,34 @@ export default {
       this.isDisplay = !this.isDisplay
     }
   },
+  computed:{
+    reverseName: {
+      get(){
+        return this.name.split("").reverse().join("")
+      },
+      set(val) {
+        this.name = val.split("").reverse().join("")
+      }
+    }
+  },
+  watch:{
+    urlHash: function(newurl,oldurl){
+      console.log(newurl,oldurl)
+    }
+  },
+  filters:{
+    // parseTime(ts){
+    //   let date = new Date(ts)
+    //   return `${date.getFullYear()}/${date.getMonth()}/${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    // }
+
+  },
+  directives:{
+    // focus: {
+    //   inserted: function(el){
+    //   el.focus()
+    // }}
+  },
   data(){
     return {
       name: "aaaa",
@@ -106,7 +143,9 @@ export default {
         {name :"host02",
           ip: "192.168.1.2"
         }
-      ]
+      ],
+        urlHash: window.location.hash,
+      ts: Date.now()
     }
   }
 }
